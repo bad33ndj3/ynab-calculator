@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/bad33ndj3/ynab/pkg/account"
+	"github.com/bad33ndj3/ynab-calculator/pkg/account"
 	"github.com/leekchan/accounting"
 	"go.bmvs.io/ynab"
 )

@@ -1,4 +1,4 @@
-module github.com/bad33ndj3/ynab
+module github.com/bad33ndj3/ynab-calculator
 
 go 1.17
 
