@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -13,7 +14,11 @@ import (
 	"go.bmvs.io/ynab"
 )
 
-const valuta = "€"
+const (
+	valuta        = "€"
+	toCents       = 1000
+	coinPrecision = 2
+)
 
 func main() {
 	// create a fyne app
@@ -57,25 +62,30 @@ func main() {
 		information := make([][2]string, 0)
 
 		// get the total of each account
-		ac := accounting.Accounting{Symbol: valuta, Precision: 2}
-		information = append(information, [2]string{"Total ", ac.FormatMoney(accountCalculator.Total() / 1000)})
-		information = append(information, [2]string{"Total Stock ", ac.FormatMoney(accountCalculator.TotalStock() / 1000)})
-		information = append(information, [2]string{"Total Crypto ", ac.FormatMoney(accountCalculator.TotalCrypto() / 1000)})
-		information = append(information, [2]string{"Total Cash ", ac.FormatMoney(accountCalculator.TotalCash() / 1000)})
+		ac := accounting.Accounting{Symbol: valuta, Precision: coinPrecision}
+		information = append(
+			information,
+			[2]string{"Total ", ac.FormatMoney(accountCalculator.Total() / toCents)},
+			[2]string{"Total Stock ", ac.FormatMoney(accountCalculator.TotalStock() / toCents)},
+			[2]string{"Total Crypto ", ac.FormatMoney(accountCalculator.TotalCrypto() / toCents)},
+			[2]string{"Total Cash ", ac.FormatMoney(accountCalculator.TotalCash() / toCents)},
+		)
 
 		// add the total of each account to a table
-		objects = append(objects, widget.NewLabel(fmt.Sprintf("Budget: %s", budget.Name)))
-		objects = append(objects, widget.NewTable(func() (int, int) {
-			if len(information) == 0 {
-				return 0, 0
-			}
-			return len(information), len(information[0])
-		}, func() fyne.CanvasObject {
-			return widget.NewLabel("")
-		}, func(i widget.TableCellID, o fyne.CanvasObject) {
-			o.(*widget.Label).SetText(information[i.Row][i.Col])
-		}))
-		objects = append(objects, layout.NewSpacer())
+		objects = append(objects,
+			widget.NewLabel(fmt.Sprintf("Budget: %s", budget.Name)),
+			widget.NewTable(func() (int, int) {
+				if len(information) == 0 {
+					return 0, 0
+				}
+				return len(information), len(information[0])
+			}, func() fyne.CanvasObject {
+				return widget.NewLabel("")
+			}, func(i widget.TableCellID, o fyne.CanvasObject) {
+				o.(*widget.Label).SetText(information[i.Row][i.Col])
+			}),
+			layout.NewSpacer(),
+		)
 	}
 
 	// render the table

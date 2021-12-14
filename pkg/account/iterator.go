@@ -19,7 +19,7 @@ type Iterator interface {
 	NewIterator() Iterator
 }
 
-// NewIterator creates a new iterator for the account
+// NewIterator creates a new iterator for the account.
 func NewIterator(a *Collection) Iterator {
 	return &accountIterator{
 		account: a,
@@ -27,19 +27,19 @@ func NewIterator(a *Collection) Iterator {
 	}
 }
 
-// NewCollection creates a new collection of accounts
+// NewCollection creates a new collection of accounts.
 func NewCollection(accounts []*account.Account) *Collection {
 	return &Collection{
 		accounts: accounts,
 	}
 }
 
-// Collection is a collection of account.Account accounts
+// Collection is a collection of account.Account accounts.
 type Collection struct {
 	accounts []*account.Account
 }
 
-// accountIterator iterates over the accounts
+// accountIterator iterates over the accounts.
 type accountIterator struct {
 	account *Collection
 	index   int
@@ -52,12 +52,12 @@ func (i *accountIterator) NewIterator() Iterator {
 	}
 }
 
-// Add adds the given account to the iterator
+// Add adds the given account to the iterator.
 func (i *accountIterator) Add(a *account.Account) {
 	i.account.accounts = append(i.account.accounts, a)
 }
 
-// Next returns the next account
+// Next returns the next account.
 func (i *accountIterator) Next() *account.Account {
 	if !i.HasNext() {
 		return nil
@@ -66,37 +66,37 @@ func (i *accountIterator) Next() *account.Account {
 	return i.account.accounts[i.index]
 }
 
-// HasNext returns true if there is another account
+// HasNext returns true if there is another account.
 func (i *accountIterator) HasNext() bool {
 	return i.index < len(i.account.accounts)-1
 }
 
-// Reset resets the iterator
+// Reset resets the iterator.
 func (i *accountIterator) Reset() {
 	i.index = -1
 }
 
-// Index returns the current index
+// Index returns the current index.
 func (i *accountIterator) Index() int {
 	return i.index
 }
 
-// Count returns the number of accounts
+// Count returns the number of accounts.
 func (i *accountIterator) Count() int {
 	return len(i.account.accounts)
 }
 
-// All returns all accounts
+// All returns all accounts.
 func (i *accountIterator) All() []*account.Account {
 	return i.account.accounts
 }
 
-// Get returns the account at the given index
+// Get returns the account at the given index.
 func (i *accountIterator) Get(index int) *account.Account {
 	return i.account.accounts[index]
 }
 
-// GetByID returns the account with the given ID
+// GetByID returns the account with the given ID.
 func (i *accountIterator) GetByID(id string) *account.Account {
 	for _, a := range i.account.accounts {
 		if a.ID == id {
@@ -106,7 +106,7 @@ func (i *accountIterator) GetByID(id string) *account.Account {
 	return nil
 }
 
-// GetByName returns the account with the given name
+// GetByName returns the account with the given name.
 func (i *accountIterator) GetByName(name string) *account.Account {
 	for _, a := range i.account.accounts {
 		if a.Name == name {
@@ -116,7 +116,7 @@ func (i *accountIterator) GetByName(name string) *account.Account {
 	return nil
 }
 
-// GetByType returns the account with the given type
+// GetByType returns the account with the given type.
 func (i *accountIterator) GetByType(t account.Type) *account.Account {
 	for _, a := range i.account.accounts {
 		if a.Type == t {

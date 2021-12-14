@@ -2,15 +2,15 @@ package account
 
 import "strings"
 
-// Calculator is a calculator interface
+// Calculator is a calculator interface.
 type Calculator interface {
-	// Total returns the total of the account
+	// Total returns the total of the account.
 	Total() float64
-	// TotalCrypto returns the total of the account in crypto
+	// TotalCrypto returns the total of the account in crypto.
 	TotalCrypto() float64
-	// TotalStock returns the total of the account in stock
+	// TotalStock returns the total of the account in stock.
 	TotalStock() float64
-	// TotalCash returns the total of the account in cash
+	// TotalCash returns the total of the account in cash.
 	TotalCash() float64
 }
 
@@ -35,7 +35,7 @@ func (c *calculator) Total() float64 {
 	return total
 }
 
-// TotalStock returns the total of the stock
+// TotalStock returns the total of the stock.
 func (c *calculator) TotalStock() float64 {
 	// return the total of balances
 	var total float64
@@ -50,7 +50,7 @@ func (c *calculator) TotalStock() float64 {
 	return total
 }
 
-// TotalCrypto returns the total of the crypto
+// TotalCrypto returns the total of the crypto.
 func (c *calculator) TotalCrypto() float64 {
 	// return the total of balances
 	var total float64
@@ -65,7 +65,7 @@ func (c *calculator) TotalCrypto() float64 {
 	return total
 }
 
-// TotalCash returns the total of the cash
+// TotalCash returns the total of the cash.
 func (c *calculator) TotalCash() float64 {
 	// return the total of balances
 	var total float64
