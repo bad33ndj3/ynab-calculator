@@ -14,7 +14,7 @@ type Calculator interface {
 	TotalCash() float64
 }
 
-// NewCalculator returns a new Calculator.
+// NewCalculator returns a new Calculator. Tst
 func NewCalculator(acc Iterator) Calculator {
 	return &calculator{acc: acc}
 }
