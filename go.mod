@@ -3,7 +3,7 @@ module github.com/bad33ndj3/ynab-calculator
 go 1.17
 
 require (
-	fyne.io/fyne/v2 v2.1.2
+	fyne.io/fyne/v2 v2.1.3
 	github.com/leekchan/accounting v1.0.0
 	go.bmvs.io/ynab v1.3.0
 )
